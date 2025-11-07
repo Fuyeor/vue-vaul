@@ -22,7 +22,7 @@ export default defineConfig({
   },
   build: {
     lib: {
-      name: 'vaul-vue',
+      name: '@fuyeor/vue-vaul',
       fileName: 'index',
       entry: resolve(__dirname, 'src/index.ts'),
     },

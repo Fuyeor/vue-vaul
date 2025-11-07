@@ -8,7 +8,7 @@ import {
   DrawerRoot,
   DrawerTitle,
   DrawerTrigger,
-} from 'vaul-vue'
+} from '@fuyeor/vue-vaul'
 
 import { computed, ref } from 'vue'
 

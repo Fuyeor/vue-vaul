@@ -1,4 +1,10 @@
-# vaul-vue
+# @fuyeor/vue-vaul
+
+## 0.4.6
+
+### Patch Changes
+
+- add willClose event
 
 ## 0.4.1
 

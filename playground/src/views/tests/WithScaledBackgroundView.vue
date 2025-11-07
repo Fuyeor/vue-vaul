@@ -6,7 +6,7 @@ import {
   DrawerRoot,
   DrawerTitle,
   DrawerTrigger,
-} from 'vaul-vue'
+} from '@fuyeor/vue-vaul'
 </script>
 
 <template>

@@ -7,7 +7,7 @@ import {
   DrawerRoot,
   DrawerTitle,
   DrawerTrigger,
-} from 'vaul-vue'
+} from '@fuyeor/vue-vaul'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import DrawerContentWrapper from '../../components/DrawerContent.vue'

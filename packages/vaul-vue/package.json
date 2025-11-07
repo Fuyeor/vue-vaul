@@ -1,8 +1,8 @@
 {
-  "name": "vaul-vue",
+  "name": "@fuyeor/vue-vaul",
   "type": "module",
-  "version": "0.4.1",
-  "repository": "https://github.com/Elliot-Alexander/vaul-vue",
+  "version": "0.4.6",
+  "repository": "https://github.com/Fuyeor/vue-vaul",
   "keywords": [
     "vue",
     "vue3",

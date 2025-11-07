@@ -8,7 +8,7 @@ import {
   DrawerRootNested,
   DrawerTitle,
   DrawerTrigger,
-} from 'vaul-vue'
+} from '@fuyeor/vue-vaul'
 import { ref } from 'vue'
 
 const open = ref(false)

@@ -1,21 +1,39 @@
 <script setup lang="ts">
-import { DrawerContent, DrawerHandle, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerTrigger } from 'vaul-vue'
+import { ref,watch } from 'vue'
+import { DrawerContent, DrawerHandle, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerTrigger } from '@fuyeor/vue-vaul'
+
+const isWillClose = ref(false)
+const isOpen = ref(false)
+
+function onWillClose(close: boolean) {
+  isWillClose.value = close
+}
+
+watch(isOpen, (newOpenState) => {
+  if (!newOpenState) {
+    isWillClose.value = false
+  }
+})
 </script>
 
 <template>
-  <DrawerRoot should-scale-background>
+   <DrawerRoot v-model:open="isOpen" should-scale-background @will-close="onWillClose">
     <DrawerTrigger
       class="rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
     >
       Open Drawer
     </DrawerTrigger>
     <DrawerPortal>
-      <DrawerOverlay class="fixed bg-black/40 inset-0" />
+      <DrawerOverlay class="fixed inset-0 bg-black/40" />
       <DrawerContent
         class="bg-gray-100 flex flex-col rounded-t-[10px] h-full mt-24 max-h-[96%] fixed bottom-0 left-0 right-0"
       >
         <div class="p-4 bg-white rounded-t-[10px] flex-1">
-          <DrawerHandle data-testid="handle" class="mb-8 mt-2" />
+          <DrawerHandle
+            data-testid="handle"
+            class="mb-8 mt-2"
+            :style="{ backgroundColor: isWillClose ? '#AEA4E4' : '#D4D4D8' }"
+          />
 
           <div class="max-w-md mx-auto">
             <h2 id="radix-:R3emdaH1:" class="font-medium mb-4">

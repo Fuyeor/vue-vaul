@@ -13,8 +13,8 @@
     "test": "pnpm run test:e2e"
   },
   "dependencies": {
+    "@fuyeor/vue-vaul": "workspace:*",
     "reka-ui": "^2.0.0",
-    "vaul-vue": "workspace:*",
     "vue": "^3.4.5",
     "vue-router": "4"
   },

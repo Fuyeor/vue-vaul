@@ -105,6 +105,11 @@ export interface DrawerRootEmits {
   (e: 'update:open', open: boolean): void
   (e: 'update:activeSnapPoint', val: string | number): void
   /**
+ * Emits when the drawer is being dragged and passes the `closeThreshold`.
+ * This can be used to show a visual indicator that the drawer will close if released.
+ */
+  (e: 'willClose', willClose: boolean): void
+  /**
    * Gets triggered after the open or close animation ends, it receives an `open` argument with the `open` state of the drawer by the time the function was triggered.
    * Useful to revert any state changes for example.
    */
@@ -116,6 +121,7 @@ export interface DialogEmitHandlers {
   emitRelease: (open: boolean) => void
   emitClose: () => void
   emitOpenChange: (open: boolean) => void
+  emitWillClose: (willClose: boolean) => void
 }
 
 export interface Drawer {
@@ -151,6 +157,7 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
     emitDrag,
     emitRelease,
     emitClose,
+    emitWillClose,
     emitOpenChange,
     open,
     dismissible,
@@ -173,6 +180,7 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
   const hasBeenOpened = ref(false)
   const isDragging = ref(false)
   const justReleased = ref(false)
+  const previousWillClose = ref(false)
 
   const overlayRef = ref<ComponentPublicInstance | null>(null)
 
@@ -324,7 +332,13 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
     isDragging.value = true
     dragStartTime.value = new Date()
 
-    ;(event.target as HTMLElement).setPointerCapture(event.pointerId)
+    // reset willClose state
+    if (previousWillClose.value) {
+      emitWillClose(false)
+      previousWillClose.value = false
+    }
+
+    (event.target as HTMLElement).setPointerCapture(event.pointerId)
     pointerStart.value = isVertical(direction.value) ? event.clientY : event.clientX
   }
 
@@ -349,8 +363,30 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
       // We need to capture last time when drag with scroll was triggered and have a timeout between
       const absDraggedDistance = Math.abs(draggedDistance)
       const wrapper
-      = (document.querySelector('[data-vaul-drawer-wrapper]') as HTMLElement)
+        = (document.querySelector('[data-vaul-drawer-wrapper]') as HTMLElement)
         || (document.querySelector('[vaul-drawer-wrapper]') as HTMLElement)
+
+      // Emit `will-close` event
+      if (!isDraggingInDirection && dismissible.value && dragStartTime.value) {
+        const visibleDrawerHeight = Math.min(
+          drawerRef.value.$el.getBoundingClientRect().height ?? 0,
+          window.innerHeight,
+        )
+
+        // calculate velocity and distance
+        const timeTaken = new Date().getTime() - dragStartTime.value.getTime()
+        const velocity = timeTaken > 0 ? absDraggedDistance / timeTaken : 0
+
+        const isClosingByDistance = absDraggedDistance >= visibleDrawerHeight * closeThreshold.value
+        const isClosingByVelocity = velocity > VELOCITY_THRESHOLD
+
+        const willClose = isClosingByDistance || isClosingByVelocity
+
+        if (willClose !== previousWillClose.value) {
+          emitWillClose(willClose)
+          previousWillClose.value = willClose
+        }
+      }
 
       // Calculate the percentage dragged, where 1 is the closed position
       let percentageDragged = absDraggedDistance / drawerHeightRef.value
@@ -446,7 +482,7 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
     if (!drawerRef.value)
       return
     const wrapper
-    = (document.querySelector('[data-vaul-drawer-wrapper]') as HTMLElement)
+      = (document.querySelector('[data-vaul-drawer-wrapper]') as HTMLElement)
       || (document.querySelector('[vaul-drawer-wrapper]') as HTMLElement)
 
     const currentSwipeAmount = getTranslate(drawerRef.value.$el, direction.value)
@@ -470,13 +506,13 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
           overflow: 'hidden',
           ...(isVertical(direction.value)
             ? {
-                transform: `scale(${getScale()}) translate3d(0, calc(env(safe-area-inset-top) + 14px), 0)`,
-                transformOrigin: 'top',
-              }
+              transform: `scale(${getScale()}) translate3d(0, calc(env(safe-area-inset-top) + 14px), 0)`,
+              transformOrigin: 'top',
+            }
             : {
-                transform: `scale(${getScale()}) translate3d(calc(env(safe-area-inset-top) + 14px), 0, 0)`,
-                transformOrigin: 'left',
-              }),
+              transform: `scale(${getScale()}) translate3d(calc(env(safe-area-inset-top) + 14px), 0, 0)`,
+              transformOrigin: 'left',
+            }),
           transitionProperty: 'transform, border-radius',
           transitionDuration: `${TRANSITIONS.DURATION}s`,
           transitionTimingFunction: `cubic-bezier(${TRANSITIONS.EASE.join(',')})`,

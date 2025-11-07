@@ -59,6 +59,7 @@ const emitHandlers = {
       emit('animationEnd', o)
     }, TRANSITIONS.DURATION * 1000)
   },
+  emitWillClose: (willClose: boolean) => emit('willClose', willClose),
 }
 
 const { closeDrawer, hasBeenOpened, modal, isOpen } = provideDrawerRootContext(
