@@ -8,15 +8,15 @@ import {
   DrawerRoot,
   DrawerTitle,
   DrawerTrigger,
-} from '@fuyeor/vue-vaul'
+} from '@fuyeor/vue-vaul';
 
-import { computed, ref } from 'vue'
+import { computed, ref } from 'vue';
 
-const snapPoints = ['148px', '355px']
+const snapPoints = ['148px', '355px'];
 
-const snap = ref<number | string | null>(snapPoints[0])
+const snap = ref<number | string | null>(snapPoints[0]);
 
-const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as string))
+const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as string));
 </script>
 
 <template>
@@ -26,9 +26,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
     </div>
     <DrawerRoot v-model:active-snap-point="snap" default-open :snap-points="snapPoints">
       <DrawerTrigger as-child>
-        <button data-testid="trigger">
-          Open Drawer
-        </button>
+        <button data-testid="trigger">Open Drawer</button>
       </DrawerTrigger>
       <DrawerOverlay class="fixed inset-0 bg-black/40" />
       <DrawerPortal>
@@ -39,7 +37,7 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
           <DrawerHandle data-testid="handle" class="mb-8 mt-2" />
           <div
             class="flex flex-col max-w-md mx-auto w-full p-4 pt-5"
-            :class=" {
+            :class="{
               'overflow-y-auto': snap === 1,
               'overflow-hidden': snap !== 1,
             }"
@@ -106,23 +104,20 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
                 />
               </svg>
             </div>
-            <h1 class="text-2xl mt-2 font-medium">
-              The Hidden Details
-            </h1>
-            <p class="text-sm mt-1 text-gray-600 mb-6">
-              2 modules, 27 hours of video
-            </p>
+            <h1 class="text-2xl mt-2 font-medium">The Hidden Details</h1>
+            <p class="text-sm mt-1 text-gray-600 mb-6">2 modules, 27 hours of video</p>
             <p class="text-gray-600">
-              The world of user interface design is an intricate landscape filled with hidden details and nuance. In
-              this course, you will learn something cool. To the untrained eye, a beautifully designed UI.
+              The world of user interface design is an intricate landscape filled with hidden
+              details and nuance. In this course, you will learn something cool. To the untrained
+              eye, a beautifully designed UI.
             </p>
-            <button class="bg-black text-gray-50 mt-8 rounded-md h-[48px] flex-shrink-0 font-medium">
+            <button
+              class="bg-black text-gray-50 mt-8 rounded-md h-[48px] flex-shrink-0 font-medium"
+            >
               Buy for $199
             </button>
             <div class="mt-12">
-              <h2 class="text-xl font-medium">
-                Module 01. The Details
-              </h2>
+              <h2 class="text-xl font-medium">Module 01. The Details</h2>
               <div class="space-y-4 mt-4">
                 <div>
                   <span class="block">Layers of UI</span>
@@ -141,18 +136,18 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
             <div class="mt-12">
               <figure>
                 <blockquote class="font-serif">
-                  “I especially loved the hidden details video. That was so useful, learned a lot by just reading it.
-                  Can't wait for more course content!”
+                  “I especially loved the hidden details video. That was so useful, learned a lot by
+                  just reading it. Can't wait for more course content!”
                 </blockquote>
                 <figcaption>
-                  <span class="text-sm text-gray-600 mt-2 block">Yvonne Ray, Frontend Developer</span>
+                  <span class="text-sm text-gray-600 mt-2 block"
+                    >Yvonne Ray, Frontend Developer</span
+                  >
                 </figcaption>
               </figure>
             </div>
             <div class="mt-12">
-              <h2 class="text-xl font-medium">
-                Module 02. The Process
-              </h2>
+              <h2 class="text-xl font-medium">Module 02. The Process</h2>
               <div class="space-y-4 mt-4">
                 <div>
                   <span class="block">Build</span>
@@ -164,7 +159,9 @@ const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as str
                 </div>
                 <div>
                   <span class="block">Putting it all together</span>
-                  <span class="text-gray-600">Let&apos;s build an app together and apply everything.</span>
+                  <span class="text-gray-600"
+                    >Let&apos;s build an app together and apply everything.</span
+                  >
                 </div>
               </div>
             </div>

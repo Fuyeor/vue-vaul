@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import { DrawerContent, type DrawerDirection } from '@fuyeor/vue-vaul'
+import { DrawerContent, type DrawerDirection } from '@fuyeor/vue-vaul';
 
-const props = withDefaults(defineProps<{
-  direction: DrawerDirection
-}>(), {
-  direction: 'bottom',
-})
+const props = withDefaults(
+  defineProps<{
+    direction: DrawerDirection;
+  }>(),
+  {
+    direction: 'bottom',
+  },
+);
 </script>
 
 <template>

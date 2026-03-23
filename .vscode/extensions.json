@@ -2,6 +2,7 @@
   "recommendations": [
     "Vue.volar",
     "ms-playwright.playwright",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
   ]
 }

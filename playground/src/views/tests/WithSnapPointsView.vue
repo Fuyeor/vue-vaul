@@ -1,14 +1,20 @@
 <script setup lang="ts">
-import { DrawerContent, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerTrigger } from '@fuyeor/vue-vaul'
-import { computed, ref } from 'vue'
+import {
+  DrawerContent,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerRoot,
+  DrawerTrigger,
+} from '@fuyeor/vue-vaul';
+import { computed, ref } from 'vue';
 
-const snapPoints = ['148px', '355px', 1]
+const snapPoints = ['148px', '355px', 1];
 
-const snap = ref<number | string | null>(snapPoints[0])
+const snap = ref<number | string | null>(snapPoints[0]);
 
-const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as string))
+const activeSnapPointIndex = computed(() => snapPoints.indexOf(snap.value as string));
 
-const open = ref<boolean>(false)
+const open = ref<boolean>(false);
 </script>
 
 <template>
@@ -21,9 +27,7 @@ const open = ref<boolean>(false)
     </div>
     <DrawerRoot v-model:open="open" v-model:active-snap-point="snap" :snap-points="snapPoints">
       <DrawerTrigger as-child>
-        <button data-testid="trigger" class="text-2xl">
-          Open Drawer
-        </button>
+        <button data-testid="trigger" class="text-2xl">Open Drawer</button>
       </DrawerTrigger>
       <DrawerPortal>
         <DrawerOverlay data-testid="overlay" class="fixed inset-0 bg-black/40" />
@@ -97,12 +101,8 @@ const open = ref<boolean>(false)
                 />
               </svg>
             </div>
-            <h1 class="text-2xl mt-2 font-medium">
-              The Hidden Details
-            </h1>
-            <p class="text-sm mt-1 text-gray-600 mb-6">
-              2 modules, 27 hours of video
-            </p>
+            <h1 class="text-2xl mt-2 font-medium">The Hidden Details</h1>
+            <p class="text-sm mt-1 text-gray-600 mb-6">2 modules, 27 hours of video</p>
             <p class="text-gray-600">
               The world of user interface design is an intricate landscape filled with hidden
               details and nuance. In this course, you will learn something cool. To the untrained
@@ -114,9 +114,7 @@ const open = ref<boolean>(false)
               Buy for $199
             </button>
             <div class="mt-12">
-              <h2 class="text-xl font-medium">
-                Module 01. The Details
-              </h2>
+              <h2 class="text-xl font-medium">Module 01. The Details</h2>
               <div class="space-y-4 mt-4">
                 <div>
                   <span class="block">Layers of UI</span>
@@ -139,14 +137,14 @@ const open = ref<boolean>(false)
                   just reading it. Can&rsquo;t wait for more course content!”
                 </blockquote>
                 <figcaption>
-                  <span class="text-sm text-gray-600 mt-2 block">Yvonne Ray, Frontend Developer</span>
+                  <span class="text-sm text-gray-600 mt-2 block"
+                    >Yvonne Ray, Frontend Developer</span
+                  >
                 </figcaption>
               </figure>
             </div>
             <div class="mt-12">
-              <h2 class="text-xl font-medium">
-                Module 02. The Process
-              </h2>
+              <h2 class="text-xl font-medium">Module 02. The Process</h2>
               <div class="space-y-4 mt-4">
                 <div>
                   <span class="block">Build</span>
@@ -158,7 +156,9 @@ const open = ref<boolean>(false)
                 </div>
                 <div>
                   <span class="block">Putting it all together</span>
-                  <span class="text-gray-600">Let&apos;s build an app together and apply everything.</span>
+                  <span class="text-gray-600"
+                    >Let&apos;s build an app together and apply everything.</span
+                  >
                 </div>
               </div>
             </div>

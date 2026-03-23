@@ -1,23 +1,30 @@
 <script setup lang="ts">
-import { ref,watch } from 'vue'
-import { DrawerContent, DrawerHandle, DrawerOverlay, DrawerPortal, DrawerRoot, DrawerTrigger } from '@fuyeor/vue-vaul'
+import { ref, watch } from 'vue';
+import {
+  DrawerContent,
+  DrawerHandle,
+  DrawerOverlay,
+  DrawerPortal,
+  DrawerRoot,
+  DrawerTrigger,
+} from '@fuyeor/vue-vaul';
 
-const isWillClose = ref(false)
-const isOpen = ref(false)
+const isWillClose = ref(false);
+const isOpen = ref(false);
 
 function onWillClose(close: boolean) {
-  isWillClose.value = close
+  isWillClose.value = close;
 }
 
 watch(isOpen, (newOpenState) => {
   if (!newOpenState) {
-    isWillClose.value = false
+    isWillClose.value = false;
   }
-})
+});
 </script>
 
 <template>
-   <DrawerRoot v-model:open="isOpen" should-scale-background @will-close="onWillClose">
+  <DrawerRoot v-model:open="isOpen" should-scale-background @will-close="onWillClose">
     <DrawerTrigger
       class="rounded-full bg-white px-4 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
     >
@@ -36,9 +43,7 @@ watch(isOpen, (newOpenState) => {
           />
 
           <div class="max-w-md mx-auto">
-            <h2 id="radix-:R3emdaH1:" class="font-medium mb-4">
-              Drawer for Vue.
-            </h2>
+            <h2 id="radix-:R3emdaH1:" class="font-medium mb-4">Drawer for Vue.</h2>
             <p class="text-gray-600 mb-2">
               This component can be used as a Dialog replacement on mobile and tablet devices.
             </p>
@@ -52,13 +57,15 @@ watch(isOpen, (newOpenState) => {
                 href="https://www.radix-ui.com/docs/primitives/components/dialog"
                 class="underline"
                 target="_blank"
-              >Radix's Dialog primitive</a>
+                >Radix's Dialog primitive</a
+              >
               under the hood and is inspired by
               <a
                 href="https://twitter.com/devongovett/status/1674470185783402496"
                 class="underline"
                 target="_blank"
-              >this tweet.</a>
+                >this tweet.</a
+              >
             </p>
           </div>
         </div>
