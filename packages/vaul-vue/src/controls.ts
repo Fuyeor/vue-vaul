@@ -1,5 +1,4 @@
-import { computed, onUnmounted, ref, watch, watchEffect } from 'vue'
-import type { ComponentPublicInstance, Ref } from 'vue'
+import { computed, ref, watch, watchEffect, type ComponentPublicInstance, type Ref } from 'vue'
 import { isClient } from '@vueuse/core'
 import { dampenValue, getTranslate, isVertical, reset, set } from './helpers'
 import { BORDER_RADIUS, DRAG_CLASS, NESTED_DISPLACEMENT, TRANSITIONS, VELOCITY_THRESHOLD, WINDOW_TOP_OFFSET } from './constants'

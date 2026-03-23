@@ -1,8 +1,8 @@
-import DrawerRoot from './DrawerRoot.vue'
-import DrawerRootNested from './DrawerRootNested.vue'
-import DrawerOverlay from './DrawerOverlay.vue'
-import DrawerContent from './DrawerContent.vue'
-import DrawerHandle from './DrawerHandle.vue'
+export { default as DrawerRoot } from './DrawerRoot.vue'
+export { default as DrawerRootNested } from './DrawerRootNested.vue'
+export { default as DrawerOverlay } from './DrawerOverlay.vue'
+export { default as DrawerContent } from './DrawerContent.vue'
+export { default as DrawerHandle } from './DrawerHandle.vue'
 
 export type {
   DrawerRootEmits,
@@ -13,14 +13,6 @@ export type {
   SnapPoint,
   DrawerDirection,
 } from './types'
-
-export {
-  DrawerRoot,
-  DrawerRootNested,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerHandle,
-}
 
 export {
   DialogClose as DrawerClose,

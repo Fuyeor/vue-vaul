@@ -1,4 +1,5 @@
 import './assets/style.css'
+import '@fuyeor/vue-vaul/style.css' 
 
 import { createApp } from 'vue'
 import App from './App.vue'
