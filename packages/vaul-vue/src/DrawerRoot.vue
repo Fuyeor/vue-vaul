@@ -1,14 +1,13 @@
 <!-- @/DrawerRoot.vue -->
 <template>
-  <DialogRoot :open="isOpen" :modal="modal" @update:open="handleOpenChange">
-    <slot :open="isOpen" />
+  <DialogRoot v-model:open="open" :modal="modal">
+    <slot :open="open" />
   </DialogRoot>
 </template>
 
 <script setup lang="ts">
 import { DialogRoot } from 'reka-ui';
-import { useVModel } from '@vueuse/core';
-import { type WritableComputedRef, computed, toRefs } from 'vue';
+import { watch, computed, toRefs } from 'vue';
 import { provideDrawerRootContext } from './context';
 import { type DrawerRootEmits, type DrawerRootProps, useDrawer } from './controls';
 import { CLOSE_THRESHOLD, SCROLL_LOCK_TIMEOUT, TRANSITIONS } from './constants';
@@ -42,13 +41,8 @@ const fadeFromIndex = computed(
   () => props.fadeFromIndex ?? (props.snapPoints && props.snapPoints.length - 1),
 );
 
-const open = useVModel(props, 'open', emit, {
-  defaultValue: props.defaultOpen,
-  passive: (props.open === undefined) as false,
-}) as WritableComputedRef<boolean>;
-
-const activeSnapPoint = useVModel(props, 'activeSnapPoint', emit, {
-  passive: (props.activeSnapPoint === undefined) as false,
+const open = defineModel<boolean>('open', {
+  default: false,
 });
 
 const emitHandlers = {
@@ -69,25 +63,22 @@ const { closeDrawer, hasBeenOpened, modal, isOpen } = provideDrawerRootContext(
   useDrawer({
     ...emitHandlers,
     ...toRefs(props),
-    activeSnapPoint,
     fadeFromIndex,
     open,
   }),
 );
 
-function handleOpenChange(o: boolean) {
-  if (open.value !== undefined) {
-    emitHandlers.emitOpenChange(o);
-    return;
-  }
-  isOpen.value = o;
-
-  if (o) {
-    hasBeenOpened.value = true;
-  } else {
-    closeDrawer();
-  }
-}
+watch(
+  open,
+  (o) => {
+    if (o) {
+      hasBeenOpened.value = true;
+    } else {
+      closeDrawer();
+    }
+  },
+  { immediate: true },
+);
 
 defineExpose({
   open: isOpen,

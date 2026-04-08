@@ -41,29 +41,23 @@
     "release": "pnpm run build-only"
   },
   "peerDependencies": {
-    "reka-ui": "^2.0.0",
-    "vue": "^3.3.0"
+    "vue": "^3.4.0"
   },
   "dependencies": {
-    "@vueuse/core": "^14.2.1",
-    "reka-ui": "^2.9.2",
-    "vue": "^3.5.30"
+    "reka-ui": "^2.9.2"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.16.1",
+    "vue": "^3.5.30",
     "@types/jsdom": "^28.0.1",
     "@types/node": "^24.2.0",
     "@vitejs/plugin-vue": "^6.0.5",
-    "@vue/eslint-config-typescript": "^14.7.0",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.9.0",
     "eslint": "^10.1.0",
     "eslint-plugin-vue": "^10.8.0",
     "jsdom": "^29.0.1",
-    "npm-run-all2": "^8.0.4",
     "typescript": "^5.9.3",
     "vite": "^8.0.1",
-    "vite-plugin-css-injected-by-js": "^4.0.1",
     "vite-plugin-dts": "^4.5.4",
     "vitest": "^4.1.0",
     "vue-tsc": "^3.2.6"

@@ -1,6 +1,15 @@
-**@fuyeor/vue-vaul** —— An enhanced, enterprise-ready fork of `vaul-vue`. This is an unstyled drawer component for Vue that can be used as a Dialog replacement on tablet and mobile devices.
+**@fuyeor/vue-vaul** —— An enhanced, zero-dependency fork of `vaul-vue`. This is an unstyled drawer component for Vue that can be used as a Dialog replacement on tablet and mobile devices.
 
-This fork maintains the core functionality while introducing critical enhancements for complex interactive scenarios, ensuring it meets military-grade project standards for stability and developer experience.
+## ⚠️ Breaking Changes (v0.5)
+
+1. **CSS Separation**: Styles are no longer injected via JS. **MUST** import the CSS manually:
+   ```typescript
+   // main.ts
+   import '@fuyeor/vue-vaul/style.css'
+   ```
+2. **ESM Only**: This package no longer supports `require()` (CommonJS) or UMD. Modern bundlers (Vite/Webpack 5+) are required.
+
+---
 
 ## Why this Fork?
 

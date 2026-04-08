@@ -1,6 +1,5 @@
 // @/controls.ts
 import { computed, ref, watch, watchEffect, type ComponentPublicInstance, type Ref } from 'vue';
-import { isClient } from '@vueuse/core';
 import { dampenValue, getTranslate, isVertical, reset, set } from './helpers';
 import {
   BORDER_RADIUS,
@@ -158,6 +157,8 @@ export interface DrawerHandleProps {
 function usePropOrDefaultRef<T>(prop: Ref<T | undefined> | undefined, defaultRef: Ref<T>): Ref<T> {
   return prop && !!prop.value ? (prop as Ref<T>) : defaultRef;
 }
+
+const isClient = typeof window !== 'undefined' && typeof document !== 'undefined';
 
 export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRootContext {
   const {

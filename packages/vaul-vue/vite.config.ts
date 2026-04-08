@@ -29,10 +29,14 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library (Vue)
-      external: ['vue', 'reka-ui'],
+      external: ['vue'],
       output: {
         // Name the only CSS file style.css
         assetFileNames: 'style.css',
+      },
+      treeshake: {
+        moduleSideEffects: false,
+        propertyReadSideEffects: false,
       },
     },
     emptyOutDir: true,
