@@ -32,14 +32,10 @@ export function useSnapPoints({
   onSnapPointChange,
   direction,
 }: useSnapPointsProps) {
-  const windowDimensions = ref(
-    typeof window !== 'undefined'
-      ? {
-          innerWidth: window.innerWidth,
-          innerHeight: window.innerHeight,
-        }
-      : undefined,
-  );
+  const windowDimensions = ref({
+    innerWidth: window.innerWidth,
+    innerHeight: window.innerHeight,
+  });
 
   function onResize() {
     windowDimensions.value = {
@@ -49,11 +45,11 @@ export function useSnapPoints({
   }
 
   onMounted(() => {
-    if (typeof window !== 'undefined') window.addEventListener('resize', onResize);
+    window.addEventListener('resize', onResize);
   });
 
   onBeforeUnmount(() => {
-    if (typeof window !== 'undefined') window.removeEventListener('resize', onResize);
+    window.removeEventListener('resize', onResize);
   });
 
   const isLastSnapPoint = computed(

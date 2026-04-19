@@ -10,7 +10,6 @@ import {
   WINDOW_TOP_OFFSET,
 } from './constants';
 import { useSnapPoints } from './useSnapPoints';
-import { usePositionFixed } from './usePositionFixed';
 import type { DrawerRootContext } from './context';
 import type { DrawerDirection } from './types';
 
@@ -158,8 +157,6 @@ function usePropOrDefaultRef<T>(prop: Ref<T | undefined> | undefined, defaultRef
   return prop && !!prop.value ? (prop as Ref<T>) : defaultRef;
 }
 
-const isClient = typeof window !== 'undefined' && typeof document !== 'undefined';
-
 export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRootContext {
   const {
     emitDrag,
@@ -251,15 +248,6 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
     if (snapPoints.value && activeSnapPointIndex === snapPointsOffset.length - 1)
       openTime.value = new Date();
   }
-
-  const { restorePositionSetting } = usePositionFixed({
-    isOpen,
-    modal,
-    nested,
-    hasBeenOpened,
-    noBodyStyles,
-    preventScrollRestoration,
-  });
 
   function getScale() {
     return (window.innerWidth - WINDOW_TOP_OFFSET) / window.innerWidth;
@@ -539,7 +527,7 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
   }
 
   watchEffect(() => {
-    if (!isOpen.value && shouldScaleBackground.value && isClient) {
+    if (!isOpen.value && shouldScaleBackground.value) {
       // Can't use `onAnimationEnd` as the component will be invisible by then
       const id = setTimeout(() => {
         reset(document.body);
@@ -552,9 +540,7 @@ export function useDrawer(props: UseDrawerProps & DialogEmitHandlers): DrawerRoo
   watch(open, () => {
     // reflect controlled `open` state
     isOpen.value = open.value;
-    if (!open.value) {
-      closeDrawer();
-    }
+    if (!open.value) closeDrawer();
   });
 
   function onRelease(event: PointerEvent) {
